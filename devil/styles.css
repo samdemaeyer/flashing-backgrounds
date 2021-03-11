@@ -1,0 +1,157 @@
+@keyframes rotate {
+  0% { transform: rotate3d(0 0, 0, 360deg); }
+  100% { transform: rotate3d(0, 1, 0, 360deg); }
+}
+
+@keyframes flashing-glow {
+  0% {
+    box-shadow: 0 0 120px 100px rgb(185 0 0)
+  }
+  50% {
+    box-shadow: 0 0 80px 180px rgb(185 0 0)
+   }
+  100% {
+    box-shadow: 0 0 120px 100px rgb(185 0 0)
+  }
+}
+
+body {
+  background-color: #000;
+  margin: 0;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.cube-wrapper {
+  width: 0;
+  height: 0;
+  top: 100px;
+  left: 100px;
+  position: absolute;
+  perspective-origin: 0 0;
+  perspective: 80px;
+}
+
+.cube-2 {
+  transform: translateZ(-50px) scaleX(1.8);
+  transform-style: preserve-3d;
+}
+
+.cube {
+  top: -100px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation-name: rotate;
+  animation-duration: 10s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.face {
+  position: absolute;
+  background-size: 662.4px 320px;
+  width: 84px;
+  height: 320px;
+}
+
+#face1 {
+  transform: translateX(-41.4px) translateZ(100px);
+  background-position: 0 0;
+}
+#face2 {
+  transform: translateX(29.2px) translateZ(70.8px) rotateY(45deg);
+  background-position: -82.8px 0;
+}
+#face3 {
+  transform: translateX(58.5px) rotateY(90deg);
+  background-position: -165.6px 0;
+}
+#face4 {
+  transform: translateX(29.2px) translateZ(-70.8px) rotateY(135deg);
+  background-position: -248.4px 0;
+}
+#face5 {
+  transform: translateX(-41.4px) translateZ(-100px) rotateY(180deg);
+  background-position: -331.2px 0;
+}
+#face6 {
+  transform: translateX(-111.4px) translateZ(-70.8px) rotateY(225deg);
+  background-position: -414px 0;
+}
+#face7 {
+  transform: translateX(-141.4px) rotateY(270deg);
+  background-position: -496.8px 0;
+}
+#face8 {
+  transform: translateX(-111.4px) translateZ(70px) rotateY(315deg);
+  background-position: -579.6px 0;
+}
+
+.circle {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+}
+.clip-circle {
+  position: absolute;
+  padding: 0;
+  top: 0;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  clip-path: circle(160px at center);
+}
+.clip-circle::after {
+  content: '';
+  width: 320px;
+  height: 320px;
+  background-color: red;
+  position: absolute;
+  opacity: 0.5;
+}
+.lighting:after {
+  content: '';
+  position: absolute;
+  top: 80px;
+  left: 110px;
+}
+.reflection:before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 320px;
+  width: 320px;
+  background-image: url(./images/devil.jpeg);
+  background-size: 320px 320px;
+  border-radius: 50%;
+  animation: flashing-glow 1.75s infinite;
+}
+
+.metal {
+  position: relative;
+  width: 320px;
+  height: 320px;
+}
+.metal .face{
+  background-image:url(./images/metal.jpeg);
+}
+.metal .cube-wrapper {
+  transform: rotateZ(-32deg);
+}
+.metal .lighting {
+  box-shadow: -20px -30px 100px 0 rgba(0, 0, 0, 0.9) inset, -75px -100px 107px 0 rgba(0, 0, 0, 0.3) inset, 75px 100px 127px 0 rgba(255, 255, 255, 0.23) inset;
+}
+.metal .lighting:after {
+  box-shadow: 0 0 45px 24px rgb(255 255 255 / 70%), 0 0 11px 10px rgb(255 255 255 / 90%)
+}
+.metal .reflection:before {
+  opacity: 0.2;
+}
