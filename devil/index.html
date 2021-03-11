@@ -2,7 +2,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Devil Moon</title>
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
@@ -27,5 +27,14 @@
       <div class="circle reflection lighting"></div>
     </div>
   </div>
+
+  <audio id="alarm" src="sounds/sad-trombone.mp3" muted></audio>
+
+  <script>
+    document.addEventListener('click', () => {
+      const audio = new Audio('sounds/sad-trombone.mp3')
+      audio.play()
+    })
+  </script>
 </body>
 </html>
