@@ -20,6 +20,17 @@ body {
   margin: 0;
 }
 
+#stop-sound {
+  background: transparent;
+  border: 1px solid #6f6e6e;
+  padding: .5rem 1rem;
+  color: #6f6e6e;
+  margin: 1rem;
+  position: absolute;
+  right: 0;
+  border-radius: 4px;
+}
+
 .wrapper {
   display: flex;
   justify-content: center;
@@ -55,7 +66,7 @@ body {
 
 .face {
   position: absolute;
-  background-size: 662.4px 320px;
+  background-size: 700px 350px;
   width: 84px;
   height: 320px;
 }
