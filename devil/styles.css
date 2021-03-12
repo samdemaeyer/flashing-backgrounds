@@ -4,19 +4,19 @@
 }
 
 @keyframes flashing-glow {
-  0% {
-    box-shadow: 0 0 120px 100px rgb(185 0 0)
-  }
-  50% {
-    box-shadow: 0 0 80px 180px rgb(185 0 0)
-   }
-  100% {
-    box-shadow: 0 0 120px 100px rgb(185 0 0)
-  }
+  0% { box-shadow: 0 0 120px 100px rgb(185 0 0); }
+  50% { box-shadow: 0 0 80px 180px rgb(185 0 0); }
+  100% { box-shadow: 0 0 120px 100px rgb(185 0 0); }
+}
+
+@keyframes flashing-bg {
+  0% { background-color: #000000; }
+  50% { background-color: #160000; }
+  100% { background-color: #000000; }
 }
 
 body {
-  background-color: #000;
+  animation: flashing-bg 1.75s infinite;
   margin: 0;
 }
 
