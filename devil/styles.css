@@ -3,6 +3,12 @@
   100% { transform: rotate3d(0, 1, 0, 360deg); }
 }
 
+@keyframes flashing-glow-red {
+  0% { box-shadow: 0 0 120px 100px rgb(185 0 0); }
+  50% { box-shadow: 0 0 80px 180px rgb(185 0 0); }
+  100% { box-shadow: 0 0 120px 100px rgb(185 0 0); }
+}
+
 @keyframes flashing-glow {
   0% { box-shadow: 0 0 120px 100px rgb(185 0 0); }
   50% { box-shadow: 0 0 80px 180px rgb(185 0 0); }
@@ -15,9 +21,39 @@
   100% { background-color: #000000; }
 }
 
+@keyframes bounce {
+  0% { margin-top: 0; }
+  50% { margin-top: 1rem; }
+  100% { margin-top: 0; }
+}
+
 body {
-  animation: flashing-bg 1.75s infinite;
   margin: 0;
+  background-color: #000000;
+}
+
+body.fail-bg {
+  animation: flashing-bg 1.75s infinite;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container .row {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container .row .item {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 #stop-sound {
@@ -29,14 +65,6 @@ body {
   position: absolute;
   right: 0;
   border-radius: 4px;
-}
-
-.wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
 }
 
 .cube-wrapper {
@@ -71,35 +99,42 @@ body {
   height: 320px;
 }
 
-#face1 {
+.face1 {
   transform: translateX(-41.4px) translateZ(100px);
   background-position: 0 0;
 }
-#face2 {
+
+.face2 {
   transform: translateX(29.2px) translateZ(70.8px) rotateY(45deg);
   background-position: -82.8px 0;
 }
-#face3 {
+
+.face3 {
   transform: translateX(58.5px) rotateY(90deg);
   background-position: -165.6px 0;
 }
-#face4 {
+
+.face4 {
   transform: translateX(29.2px) translateZ(-70.8px) rotateY(135deg);
   background-position: -248.4px 0;
 }
-#face5 {
+
+.face5 {
   transform: translateX(-41.4px) translateZ(-100px) rotateY(180deg);
   background-position: -331.2px 0;
 }
-#face6 {
+
+.face6 {
   transform: translateX(-111.4px) translateZ(-70.8px) rotateY(225deg);
   background-position: -414px 0;
 }
-#face7 {
+
+.face7 {
   transform: translateX(-141.4px) rotateY(270deg);
   background-position: -496.8px 0;
 }
-#face8 {
+
+.face8 {
   transform: translateX(-111.4px) translateZ(70px) rotateY(315deg);
   background-position: -579.6px 0;
 }
@@ -110,6 +145,7 @@ body {
   height: 320px;
   border-radius: 50%;
 }
+
 .clip-circle {
   position: absolute;
   padding: 0;
@@ -119,20 +155,31 @@ body {
   border-radius: 50%;
   clip-path: circle(160px at center);
 }
+
 .clip-circle::after {
   content: '';
   width: 320px;
   height: 320px;
-  background-color: red;
+  background-color: #56d364;
   position: absolute;
   opacity: 0.5;
 }
+
+.pending .clip-circle::after {
+  background-color: #e3b341;
+}
+
+.fail .clip-circle::after {
+  background-color: #f85149;
+}
+
 .lighting:after {
   content: '';
   position: absolute;
   top: 80px;
   left: 110px;
 }
+
 .reflection:before {
   content: '';
   position: absolute;
@@ -140,29 +187,126 @@ body {
   left: 0px;
   height: 320px;
   width: 320px;
-  background-image: url(./images/devil.jpeg);
   background-size: 320px 320px;
+  opacity: 0.2;
   border-radius: 50%;
-  animation: flashing-glow 1.75s infinite;
+  box-shadow: 0px 0px 70px 0px #47b700;
 }
 
-.metal {
+.pending .reflection:before {
+  box-shadow: 0px 0px 70px 0px #b7b400;
+}
+
+.has-img .ci .reflection:before {
+  background-image: url(./images/planets/ci.png);
+}
+
+.has-img .smart .reflection:before {
+  background-image: url(./images/planets/smart.png);
+}
+
+.has-img .niac .reflection:before {
+  background-image: url(./images/planets/niac.png);
+}
+
+.has-img .zurich .reflection:before {
+  background-image: url(./images/planets/zurich.jpeg);
+}
+
+.has-img .nemo .reflection:before {
+  background-image: url(./images/planets/nemo.png);
+}
+
+.has-img .fail .reflection:before {
+  background-image: url(./images/planets/devil.jpeg);
+}
+
+.fail .reflection:before {
+  animation: flashing-glow-red 1.75s infinite;
+}
+
+.planet {
   position: relative;
   width: 320px;
   height: 320px;
 }
-.metal .face{
-  background-image:url(./images/metal.jpeg);
+
+.planet .face{
+  background-image:url(./images/planets/metal.jpeg);
 }
-.metal .cube-wrapper {
+
+.planet .cube-wrapper {
   transform: rotateZ(-32deg);
 }
-.metal .lighting {
-  box-shadow: -20px -30px 100px 0 rgba(0, 0, 0, 0.9) inset, -75px -100px 107px 0 rgba(0, 0, 0, 0.3) inset, 75px 100px 127px 0 rgba(255, 255, 255, 0.23) inset;
+
+.planet .lighting {
+  box-shadow:
+    -20px -30px 100px 0 rgba(0, 0, 0, 0.9) inset,
+    -75px -100px 107px 0 rgba(0, 0, 0, 0.3) inset,
+    75px 100px 127px 0 rgba(255, 255, 255, 0.23) inset;
 }
-.metal .lighting:after {
-  box-shadow: 0 0 45px 24px rgb(255 255 255 / 70%), 0 0 11px 10px rgb(255 255 255 / 90%)
+
+.planet .lighting:after {
+  box-shadow:
+    0 0 45px 24px rgb(255 255 255 / 70%),
+    0 0 11px 10px rgb(255 255 255 / 90%);
 }
-.metal .reflection:before {
-  opacity: 0.2;
+
+.small .circle {
+  width: 200px;
+  height: 200px;
+}
+
+.small .clip-circle {
+  width: 200px;
+  height: 200px;
+}
+
+.small .clip-circle::after {
+  width: 200px;
+  height: 200px;
+}
+
+.small .reflection:before {
+  height: 200px;
+  width: 200px;
+  background-size: 200px 200px;
+}
+
+.small .planet {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+.planet {
+  animation: bounce 2s infinite;
+}
+
+.smart.planet {
+  animation-delay: .3s;
+}
+
+.niac.planet {
+  animation-delay: .6s;
+}
+
+.heat.planet {
+  animation-delay: .9s;
+}
+
+.nemo.planet {
+  animation-delay: 1.2s;
+}
+
+.small .face {
+  height: 200px;
+}
+
+.small .clip-circle {
+  clip-path: circle(100px at center);
+}
+
+.small .lighting:after {
+  top: 60px;
+  left: 80px;
 }
