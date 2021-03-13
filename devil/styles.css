@@ -4,15 +4,21 @@
 }
 
 @keyframes flashing-glow-red {
-  0% { box-shadow: 0 0 120px 100px rgb(185 0 0); }
-  50% { box-shadow: 0 0 80px 180px rgb(185 0 0); }
-  100% { box-shadow: 0 0 120px 100px rgb(185 0 0); }
+  0% { box-shadow: 0 0 100px 80px #f85149; }
+  50% { box-shadow: 0 0 60px 55px #f85149; }
+  100% { box-shadow: 0 0 100px 80px #f85149; }
 }
 
-@keyframes flashing-glow {
-  0% { box-shadow: 0 0 120px 100px rgb(185 0 0); }
-  50% { box-shadow: 0 0 80px 180px rgb(185 0 0); }
-  100% { box-shadow: 0 0 120px 100px rgb(185 0 0); }
+@keyframes flashing-glow-green {
+  0% { box-shadow:  0px 0px 100px 20px #56d364; }
+  50% { box-shadow:  0px 0px 80px 35px #56d364; }
+  100% { box-shadow:  0px 0px 100px 20px #56d364; }
+}
+
+@keyframes flashing-glow-yellow {
+  0% { box-shadow:  0px 0px 100px 20px #e3b341; }
+  50% { box-shadow:  0px 0px 80px 35px #e3b341; }
+  100% { box-shadow:  0px 0px 100px 20px #e3b341; }
 }
 
 @keyframes flashing-bg {
@@ -190,11 +196,18 @@ body.fail-bg {
   background-size: 320px 320px;
   opacity: 0.2;
   border-radius: 50%;
-  box-shadow: 0px 0px 70px 0px #47b700;
+  box-shadow: 0px 0px 100px 20px #56d364;
+  animation: flashing-glow-green 2s infinite;
 }
 
 .pending .reflection:before {
-  box-shadow: 0px 0px 70px 0px #b7b400;
+  box-shadow: 0px 0px 100px 20px #e3b341;
+  animation: flashing-glow-yellow 2s infinite;
+}
+
+.fail .reflection:before {
+  box-shadow: 0 0 120px 100px #f85149;
+  animation: flashing-glow-red 1.75s infinite;
 }
 
 .has-img .ci .reflection:before {
@@ -221,8 +234,20 @@ body.fail-bg {
   background-image: url(./images/planets/devil.jpeg);
 }
 
-.fail .reflection:before {
-  animation: flashing-glow-red 1.75s infinite;
+.smart .reflection:before {
+  animation-delay: .3s;
+}
+
+.niac .reflection:before {
+  animation-delay: .6s;
+}
+
+.heat .reflection:before {
+  animation-delay: .9s;
+}
+
+.nemo .reflection:before {
+  animation-delay: 1.2s;
 }
 
 .planet {
@@ -278,8 +303,9 @@ body.fail-bg {
   width: 200px;
   height: 200px;
 }
+
 .planet {
-  animation: bounce 2s infinite;
+  animation: bounce 1.75s infinite;
 }
 
 .smart.planet {
