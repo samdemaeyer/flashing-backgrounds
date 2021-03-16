@@ -230,7 +230,7 @@ body.fail-bg {
   background-image: url(./images/planets/nemo.png);
 }
 
-.has-img .fail .reflection:before {
+.fail .reflection:before {
   background-image: url(./images/planets/devil.jpeg);
 }
 
